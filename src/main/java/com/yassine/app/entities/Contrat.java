@@ -1,11 +1,21 @@
 
 package com.yassine.app.entities;
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.*;
 
 
 @Entity
 @Table(name="contrats")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contrat implements Serializable{
 	
 	@Id
@@ -25,5 +35,8 @@ public class Contrat implements Serializable{
 	// Because renting is gonna be per month
 	@Column(name = "duree")
 	private int duree;
+	
+	@Column(name= "prix")
+	private float prix;
 	
 }
