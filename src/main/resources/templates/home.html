@@ -14,7 +14,32 @@
 	    <p>Platform de location des logement</p>
 	</div>
 	<div class="container">
-		<h1>Wellcome</h1>
+		<div class="row">
+			<div class="offset-2 col-4 ">
+				<div class="card" style="width: 18rem;">
+				  <img th:src="@{/images/agency.png}" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">agency login</h5>
+				    <p class="card-text">comme etant une agence vous pouvez mettre vos logement qui sont disponible et pret a etre louer</p>
+				    <div class="text-center">
+						<a th:href="@{/client/login}" class="btn btn-success stretched-link">Login</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="card" style="width: 18rem;">
+				  <img th:src="@{/images/client.png}" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Client login</h5>
+				    <p class="card-text">comme etant un client vous beneficier des services pour allouer un maison ou un studio ou un appartement</p>
+				    <div class="text-center">
+				    	<a th:href="@{/client/login}" class="btn btn-success stretched-link">Login</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
