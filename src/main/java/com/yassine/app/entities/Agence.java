@@ -1,6 +1,8 @@
 package com.yassine.app.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -17,11 +19,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Agence implements Serializable{
 	
-	@Id
-	@GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@Column(name="nom")
 	private String nom;
+	
+	@OneToMany(targetEntity = Contrat.class, cascade= CascadeType.ALL)
+	@JoinColumn(name = "idAgence", referencedColumnName="id")
+	private List<Contrat> listContrats;
+	
+	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
+	@JoinColumn(name = "idAgence", referencedColumnName="id")
+	private List<Contrat> listLogement;
 	
 }

@@ -1,6 +1,7 @@
 package com.yassine.app.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 import lombok.*;
@@ -15,18 +16,24 @@ import lombok.*;
 public class Client implements Serializable {
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@Column(name="nom")
-	private float nom;
+	private String nom;
 	
 	@Column(name="email")
-	private float email;
+	private String email;
 	
 	@Column(name="password")
-	private float password;
+	private String password;
 	
+	@OneToMany(targetEntity = Contrat.class, cascade= CascadeType.ALL)
+	@JoinColumn(name = "idClient", referencedColumnName="id")
+	private List<Contrat> listContrats;
 	
+	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
+	@JoinColumn(name = "idClient", referencedColumnName="id")
+	private List<Contrat> listLogement;
 	
 }
