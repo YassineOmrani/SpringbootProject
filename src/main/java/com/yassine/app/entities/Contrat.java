@@ -18,14 +18,15 @@ import java.io.*;
 @NoArgsConstructor
 public class Contrat implements Serializable{
 	
-	@Id
-	@GeneratedValue
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@Column(name = "idClient")
 	private int idClient;
 	
-	@Column(name = "idLogement")
+	@OneToOne(targetEntity = Logement.class)
+	@JoinColumn(name="id")
 	private int idLogement;
 	
 	@Column(name = "idAgence")
@@ -36,6 +37,7 @@ public class Contrat implements Serializable{
 	@Column(name = "duree")
 	private int duree;
 	
+	// Is gonna always be (Price = prix per months X nb of months)
 	@Column(name= "prix")
 	private float prix;
 	

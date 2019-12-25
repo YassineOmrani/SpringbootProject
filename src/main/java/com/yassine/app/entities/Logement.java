@@ -12,8 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 public class Logement {
 	
-	@Id 
-	@GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id ;
 	
 	@Column(name = "idAgence")
