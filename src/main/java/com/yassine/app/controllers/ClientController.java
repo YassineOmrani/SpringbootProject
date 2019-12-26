@@ -4,6 +4,7 @@ import com.yassine.app.entities.Client;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/authClient")
-	public String authClient(Model model,Client client) {
+	public String authClient(Model model,Client client,HttpServletRequest request) {
 		Optional<Client> client1 = clientRepo.findByEmail(client.getEmail());
 		
 		if (client1.isPresent()) {
@@ -76,6 +77,7 @@ public class ClientController {
 			// Testing if passwords match
 			if (bCryptPasswordEncoderLocal.matches(client.getPassword(), client1.get().getPassword())) {
 				model.addAttribute("currentClient", client1);
+				request.getSession().setAttribute("userType", "Client");
 				return "wellcome";
 			}else {			
 				Client client2 = new Client();

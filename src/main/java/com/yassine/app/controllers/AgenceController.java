@@ -2,6 +2,8 @@ package com.yassine.app.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -53,24 +55,24 @@ public class AgenceController {
 	}
 	
 	@RequestMapping(value="/authAgence")
-	public String authClient(Model model,Agence agence) {
+	public String authClient(Model model,Agence agence,HttpServletRequest request) {
 		Optional<Agence> agence1 = agenceRepo.findByEmail(agence.getEmail());
 		
 		if (agence1.isPresent()) {
-
 			BCryptPasswordEncoder bCryptPasswordEncoderLocal = new BCryptPasswordEncoder();
-			String encodedPassword = bCryptPasswordEncoderLocal.encode(agence.getPassword());
-			
 			// Testing if passwords match
 			if (bCryptPasswordEncoderLocal.matches(agence.getPassword(), agence1.get().getPassword())) {
 				model.addAttribute("currentAgence", agence1);
+				request.getSession().setAttribute("userType", "Agence");
 				return "wellcome";
-			}else {			
+			}else {
+				// Wrong password
 				Agence a = new Agence();
 				model.addAttribute("agence",a);
 				return "loginAgence";
 			}
 		} else {
+			// Not in database
 			Agence a = new Agence();
 			model.addAttribute("agence",a);
 			return "loginAgence";
