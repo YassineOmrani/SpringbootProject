@@ -21,7 +21,13 @@ public class Agence implements Serializable{
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
+    
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="password")
+	private String password;
 	
 	@Column(name="nom")
 	private String nom;
@@ -57,13 +63,41 @@ public class Agence implements Serializable{
 	}
 
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+
+	public Agence(String email, String password, String nom) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.nom = nom;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 

@@ -26,15 +26,15 @@
 	  </div>
 	</nav>
     <div class="container">
-    	<h1>Signup as Client</h1>
+    	<h1>Signup as Agency</h1>
     </div>
     <div class="text-center container border" style="padding: 20px;margin-top:20px;">
     	<div class="row">
     		<div class="col">
-    			<img th:src="@{/images/client.png}" class="card-img-top" alt="..." style="width:329px;height:202px;">
+    			<img th:src="@{/images/agency.png}" class="card-img-top" alt="..." style="width:329px;height:202px;">
     		</div>
     		<div class="col">
-      			<form th:action="@{signupClient}" method="post" th:object="${client}">
+      			<form th:action="@{signupAgence}" method="post" th:object="${agence}">
 			        <div class="">
 			          <div class="form-group">
 			            <div class="row">
@@ -45,7 +45,7 @@
 								<input
 					              type="text"
 					              size="20"
-					              th:field="${client.nom}"
+					              th:field="${agence.nom}"
 					              class="form-control"
 					            />
 			               	</div>
@@ -60,7 +60,7 @@
 								<input
 					              type="text"
 					              size="20"
-					              th:field="${client.email}"
+					              th:field="${agence.email}"
 					              class="form-control"
 					            />
 			               	</div>
@@ -75,7 +75,7 @@
 					    	   <input
 					              type="password"
 					              size="20"
-					              th:field="${client.password}"
+					              th:field="${agence.password}"
 					              class="form-control"
 					            />
 			            	</div>
