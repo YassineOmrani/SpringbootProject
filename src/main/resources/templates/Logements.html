@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Liste des logements</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+
+</head>
+<body>
+
+<h1> <center>Liste des logements par page</center></h1>
+<div class="marges">
+
+<table class="table table-striped">
+<thead>
+<th>ID</th><th>Adresse</th><th>Disponibilité</th><th>Prix</th><th></th><th></th>
+</thead>
+<tbody>
+<tr th:each="e:${page_logement.content}">
+<td th:text="${e.id}" />
+<td th:text="${e.adress}" />
+<td th:text="${e.dispo}" />
+<td th:text="${e.prix}" />
+</tr>
+</tbody>
+</table>
+</div>
+<div class="container">
+<UL class="nav">
+<LI th:each="p:${pages}">&nbsp;&nbsp;[<a th:text=${p} th:href="@{Affichage(page=${p})}"/>]&nbsp;&nbsp;</LI>
+</UL>
+</div>
+</body>
+</html>

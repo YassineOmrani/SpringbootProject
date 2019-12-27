@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Modifier un logement</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}" />
+
+</head>
+<body>
+
+	<h1>
+		<center> Modification d'un logement</center>
+	</h1>
+
+	<form th:action="@{saveMod(page=${pg})}" method="post"	th:object="${Logement}">
+		<label class="control-label">Addresse</label>
+<input type="text" th:field="*{adress}" class="form-control"/>
+<span th:errors="*{adress}" th:errorclass="fieldError">adress error</span>
+</div>
+<div class="form-group">
+<label class="control-label" >prix</label>
+<input type="text" th:field="*{prix}" class="form-control"/>
+<span class="text-danger" th:errors="*{prix}">prix Error</span>
+</div>
+<input type="hidden" th:field="*{id}">
+
+			<div>
+				<button type="submit" class="form-control">Modifier...</button>
+			</div>
+		</div>
+	</form>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="utf-8"/>
+<title>Ajout d'un logement</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+
+</head>
+<body>
+
+<div class="panel panel-default marges col-md-9">
+<div class="panel-heading">
+<h1> <center> Ajout d'un logement </center></h1>
+</div>
+<div class="panel-body">
+<form  th:action="@{save}" method="POST" th:object="${Logement}">
+<div class="marges col-md-3">
+<div class="form-group">
+<label class="control-label">Addresse</label>
+<input type="text" th:field="*{adress}" class="form-control"/>
+<span th:errors="*{adress}" th:errorclass="fieldError">adress error</span>
+</div>
+<div class="form-group">
+<label class="control-label" >prix</label>
+<input type="text" th:field="*{prix}" class="form-control"/>
+<span class="text-danger" th:errors="*{prix}">prix Error</span>
+</div>
+
+
+<div>
+<button type="submit" class="form-control">create</button>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+</body>
+</html>

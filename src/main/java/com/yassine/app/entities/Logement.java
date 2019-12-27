@@ -14,19 +14,21 @@ public class Logement {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id ;
+	private Long id ;
 	
     @Column(name="adress")
     private String adress;
     
 	@Column(name = "idAgence")
-	private int idAgence;
+	private Long idAgence;
 	
 	@Column(name="idClient")
 	private int idClient;
 	
 	@Column(name="dispo")
 	private boolean dispo;
+	@Column(name="prix")
+	private float prix;
 
 
 }

@@ -1,22 +1,24 @@
 package com.yassine.app.controllers;
 
-import com.yassine.app.entities.Client;
-
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yassine.app.entities.Client;
+import com.yassine.app.entities.Logement;
 import com.yassine.app.repository.ClientRepository;
+import com.yassine.app.repository.LogementRepository;
 
 @Controller
 @RequestMapping(value="/client")
@@ -25,7 +27,8 @@ public class ClientController {
 	
 	@Autowired
 	ClientRepository clientRepo;
-	
+	@Autowired
+	LogementRepository log;
 	
 	
 	// I declared this just to display home when using thymeleaf th:href{@home}
@@ -55,6 +58,18 @@ public class ClientController {
 			clientRepo.save(c);
 			return "loginClient";
 		}
+	}
+	@RequestMapping(value="/Affichage")
+	public String Affichage(Model model, @RequestParam(name="page", defaultValue="0")int p,HttpServletRequest request) {
+		Page<Logement> liste=log.findAll(PageRequest.of(p,5));
+		model.addAttribute("page_logement", liste);
+		int nbPages = liste.getTotalPages();
+		int pages[] = new int[nbPages];
+		for(int i=0;i<nbPages; i++)
+			pages[i]=i;
+		model.addAttribute("pages", pages);
+		
+		return "Logements";
 	}
 	
 	
