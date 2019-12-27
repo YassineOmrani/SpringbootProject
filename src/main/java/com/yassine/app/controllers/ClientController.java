@@ -61,7 +61,7 @@ public class ClientController {
 	}
 	@RequestMapping(value="/Affichage")
 	public String Affichage(Model model, @RequestParam(name="page", defaultValue="0")int p,HttpServletRequest request) {
-		Page<Logement> liste=log.findAll(PageRequest.of(p,5));
+		Page<Logement> liste=log.findByDispo(true,PageRequest.of(p,5));
 		model.addAttribute("page_logement", liste);
 		int nbPages = liste.getTotalPages();
 		int pages[] = new int[nbPages];

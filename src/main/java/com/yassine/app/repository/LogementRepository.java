@@ -16,6 +16,6 @@ public interface LogementRepository extends JpaRepository<Logement, Long> {
 	Page<Logement> findAll(Pageable p);
 	List<Logement> findByIdAgence(Long id);
 	Page<Logement> findByIdAgence(Long id,Pageable p);
-	
+	Page<Logement> findByDispo(boolean a,Pageable p);
 	
 }
