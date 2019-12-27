@@ -24,6 +24,7 @@ public class AgenceController {
 	@Autowired
 	AgenceRepository agenceRepo;
 	
+	// Display signup page for agence
 	@RequestMapping(value="/signup")
 	public String signup(Model model) {
 		Agence c1 = new Agence();
