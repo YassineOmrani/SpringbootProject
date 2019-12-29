@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yassine.app.entities.Agence;
 import com.yassine.app.entities.Client;
+import com.yassine.app.entities.Contrat;
 import com.yassine.app.entities.Logement;
+import com.yassine.app.repository.AgenceRepository;
 import com.yassine.app.repository.ClientRepository;
+import com.yassine.app.repository.ContratRepository;
 import com.yassine.app.repository.LogementRepository;
 
 @Controller
@@ -29,7 +33,10 @@ public class ClientController {
 	ClientRepository clientRepo;
 	@Autowired
 	LogementRepository log;
-	
+	@Autowired
+	ContratRepository con;
+	@Autowired
+	AgenceRepository age;
 	
 	// I declared this just to display home when using thymeleaf th:href{@home}
 	@RequestMapping(value="/home")
@@ -68,8 +75,14 @@ public class ClientController {
 		for(int i=0;i<nbPages; i++)
 			pages[i]=i;
 		model.addAttribute("pages", pages);
+		model.addAttribute("id",request.getSession().getAttribute("id"));
 		
 		return "Logements";
+	}
+	@RequestMapping(value="/logout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "home";
 	}
 	
 	
@@ -93,7 +106,8 @@ public class ClientController {
 			if (bCryptPasswordEncoderLocal.matches(client.getPassword(), client1.get().getPassword())) {
 				model.addAttribute("currentClient", client1);
 				request.getSession().setAttribute("userType", "Client");
-				return "wellcome";
+				request.getSession().setAttribute("id", client1.get().getId());
+				return "redirect:Affichage";
 			}else {			
 				Client client2 = new Client();
 				model.addAttribute("client",client2);
@@ -103,6 +117,29 @@ public class ClientController {
 			Client client2 = new Client();
 			model.addAttribute("client",client2);
 			return "loginClient";
+		}
+	}
+	@RequestMapping(value="/location")
+	public String pageLocation(Model model,HttpServletRequest request,@RequestParam(name="id_logement",defaultValue="0")Long id) {
+		Contrat c1=new Contrat();
+		Logement l1=log.findById(id).get();
+		c1.setLogement(l1);
+		c1.setClient(clientRepo.findById((Long)request.getSession().getAttribute("id")).get());
+		Agence a1=age.findById(l1.getIdAgence()).get();
+		c1.setAgence(a1);
+		model.addAttribute("contrat",c1);
+		return "location";
+	}
+	@RequestMapping(value="/contrat", method=RequestMethod.POST)
+	public String contrat(Model model,Contrat c1) {
+		if(String.valueOf(c1.getDuree())=="") {
+			return "redirect:location";
+		}
+		else {
+			c1.getLogement().setDispo(false);
+			c1.getLogement().setIdClient(c1.getClient().getId());
+			con.save(c1);
+			return "redirect:Affichage";
 		}
 	}
 	

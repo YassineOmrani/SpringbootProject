@@ -23,12 +23,13 @@ public class Logement {
 	private Long idAgence;
 	
 	@Column(name="idClient")
-	private int idClient;
+	private Long idClient;
 	
 	@Column(name="dispo")
 	private boolean dispo;
 	@Column(name="prix")
 	private float prix;
-
+	@OneToOne(mappedBy = "logement")
+    private Contrat contrat;
 
 }

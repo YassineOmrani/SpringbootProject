@@ -31,18 +31,13 @@ public class Agence implements Serializable{
 	
 	@Column(name="nom")
 	private String nom;
-	
-	@OneToMany(targetEntity = Contrat.class, cascade= CascadeType.ALL)
-	@JoinColumn(name = "idAgence", referencedColumnName="id")
-	private List<Contrat> listContrats;
-	
 	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
 	@JoinColumn(name = "idAgence", referencedColumnName="id")
-	private List<Contrat> listLogement;
-
-
-	// Contructor && Getters && Setters
-	// Because lombok is useless and i hate Java
+	private List<Logement> listLogement;
+	
+	@OneToMany(mappedBy = "agence", cascade = CascadeType.ALL)
+    private List<Contrat> Contrats;
+	
 	
 	
 	

@@ -22,27 +22,23 @@ public class Contrat implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-    @Column(name="nom_agence")
-    private String nom;
     
-	@Column(name = "idClient")
-	private int idClient;
+    @ManyToOne
+    @JoinColumn(name = "idClient")
+    private Client client;
 	
-	@OneToOne(targetEntity = Logement.class)
-	@JoinColumn(name="id")
-	private int idLogement;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private Logement logement;
 	
-	@Column(name = "idAgence")
-	private int idAgence;
+	@ManyToOne
+    @JoinColumn(name = "idAgence")
+    private Agence agence;
 	
 	// Duree is an integer
 	// Because renting is gonna be per month
 	@Column(name = "duree")
 	private int duree;
-	
-	// Is gonna always be (Price = prix per months X nb of months)
-	@Column(name= "prix")
-	private float prix;
 
 	
 	

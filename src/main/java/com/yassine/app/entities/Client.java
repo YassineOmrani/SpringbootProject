@@ -28,9 +28,8 @@ public class Client implements Serializable {
 	@Column(name="password")
 	private String password;
 	
-	@OneToMany(targetEntity = Contrat.class, cascade= CascadeType.ALL)
-	@JoinColumn(name = "idClient", referencedColumnName="id")
-	private List<Contrat> listContrats;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Contrat> contrat;
 	
 	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
 	@JoinColumn(name = "idClient", referencedColumnName="id")
