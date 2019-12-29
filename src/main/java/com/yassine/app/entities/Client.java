@@ -34,7 +34,7 @@ public class Client implements Serializable {
 	
 	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
 	@JoinColumn(name = "idClient", referencedColumnName="id")
-	private List<Contrat> listLogement;
+	private List<Logement> listLogement;
 
 	
 	
