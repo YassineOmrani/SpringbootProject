@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="utf-8"/>
+<title>Ajout d'un logement</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+
+</head>
+<body>
+
+<div class="panel panel-default marges col-md-9">
+<div class="panel-heading">
+<h1> <center> Ajout d'un logement </center></h1>
+</div>
+<div class="panel-body">
+<form  th:action="@{contrat}" method="POST" th:object="${contrat}">
+<div class="marges col-md-3">
+<div class="form-group">
+<label class="control-label" >Prenom du client:</label>
+<input type="text" th:field="*{client.nom}" disabled="disabled" class="form-control"/>
+<span class="text-danger" th:errors="*{client.nom}">name Error</span>
+</div>
+<div class="form-group">
+<label class="control-label">Agence</label>
+<input type="text" th:field="*{agence.nom}" disabled="disabled" class="form-control"/>
+<span th:errors="*{agence.nom}" th:errorclass="fieldError">agence error</span>
+</div>
+<div class="form-group">
+<label class="control-label" >Adresse du logement</label>
+<input type="text" th:field="*{logement.adress}" disabled="disabled" class="form-control"/>
+<span class="text-danger" th:errors="*{logement.adress}">adress Error</span>
+</div>
+<div class="form-group">
+<label class="control-label" >prix</label>
+<input type="text" th:field="*{logement.prix}" disabled="disabled" class="form-control"/>
+<span class="text-danger" th:errors="*{logement.prix}">prix Error</span>
+</div>
+<div class="form-group">
+<label class="control-label" >duree</label>
+<input type="text" th:field="*{duree}" class="form-control"/>
+<span class="text-danger" th:errors="*{duree}">duree Error</span>
+</div>
+<input type="hidden" th:field="*{client}"/>
+<input type="hidden" th:field="*{agence}"/>
+<input type="hidden" th:field="*{logement}"/>
+
+
+<div>
+<button type="submit" class="form-control">Signer</button>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+</body>
+</html>
