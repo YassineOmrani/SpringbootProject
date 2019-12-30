@@ -1,5 +1,7 @@
 package com.yassine.app.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +81,38 @@ public class ClientController {
 		
 		return "Logements";
 	}
+	
+	// Afficher les contrats pour les clients
+	
+	@RequestMapping(value="/mesContrats")
+	public String mesContrats
+	(	Model model,
+	   	HttpServletRequest request,
+	   	@RequestParam(name="page", defaultValue="0")int p
+   	) 
+	{
+		Client c = clientRepo.getOne((long) request.getSession().getAttribute("id"));
+		Page<Contrat> listContrat = con.findByClient(c, PageRequest.of(p, 5));
+		
+		model.addAttribute("page_contrat", listContrat);
+		int nbPages = listContrat.getTotalPages();
+		int pages[] = new int[nbPages];
+		for(int i=0;i<nbPages; i++) {
+			pages[i]=i;
+			
+		}
+
+		model.addAttribute("pages", pages);
+		model.addAttribute("id",request.getSession().getAttribute("id"));
+		
+		
+		return "mesContrats";
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
@@ -119,9 +153,11 @@ public class ClientController {
 			return "loginClient";
 		}
 	}
+	
+	
 	@RequestMapping(value="/location")
 	public String pageLocation(Model model,HttpServletRequest request,@RequestParam(name="id_logement",defaultValue="0")Long id) {
-		Contrat c1=new Contrat();
+		Contrat c1	=	new Contrat();
 		Logement l1=log.findById(id).get();
 		c1.setLogement(l1);
 		c1.setClient(clientRepo.findById((Long)request.getSession().getAttribute("id")).get());
@@ -130,6 +166,7 @@ public class ClientController {
 		model.addAttribute("contrat",c1);
 		return "location";
 	}
+	
 	@RequestMapping(value="/contrat", method=RequestMethod.POST)
 	public String contrat(Model model,Contrat c1) {
 		if(String.valueOf(c1.getDuree())=="") {
@@ -143,5 +180,7 @@ public class ClientController {
 		}
 	}
 	
+	
+
 	
 }

@@ -1,5 +1,7 @@
 package com.yassine.app.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -27,9 +29,14 @@ public class Logement {
 	
 	@Column(name="dispo")
 	private boolean dispo;
+	
 	@Column(name="prix")
 	private float prix;
+	
 	@OneToOne(mappedBy = "logement")
     private Contrat contrat;
+	
+	@OneToMany(mappedBy = "logement", cascade = CascadeType.ALL)
+    private List<Images> images;
 
 }

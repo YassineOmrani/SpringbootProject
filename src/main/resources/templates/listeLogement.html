@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>Liste des logements</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}" />
+<div th:replace="Fragements/nav :: head"></div>
 
 </head>
 <body>
+	<div th:replace="Fragements/nav :: navbarAgence"></div>
+	<div class="text-center" style="margin-top: 20px; margin-bottom: 20px">
+		<a href="create" class="btn btn-success">Create</a>
+	</div>
+	<h1 class="text-center" style="padding-bottom:20px;">Mes Logements</h1>
 
-<h1> <center>Liste des logements par page</center></h1>
-<button><a href="create">Create</a></button>
-<div class="marges">
-
-<table class="table table-striped">
-<thead>
-<th>ID</th><th>Adresse</th><th>Disponibilité</th><th>Prix</th><th></th><th></th>
-</thead>
-<tbody>
-<tr th:each="e:${page_logement.content}">
-<td th:text="${e.id}" />
-<td th:text="${e.adress}" />
-<td th:text="${e.dispo}" />
-<td th:text="${e.prix}" />
-<td> <a th:text="Supprimer..." th:href="@{delete(id_logement=${e.id}, page=${pg})}" /> </td>
-<td> <a th:text="Modifier..." th:href="@{modify(id_logement=${e.id}, page=${pg})}" /> </td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="container">
-<UL class="nav">
-<LI th:each="p:${pages}">&nbsp;&nbsp;[<a th:text=${p} th:href="@{Affichage(page=${p})}"/>]&nbsp;&nbsp;</LI>
-</UL>
-</div>
+	<div class="container">
+		<div class="row">
+			  <div class="card col-3" th:each="e:${page_logement.content}" style="margin-left:10px">
+			    <img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top" alt="...">
+			    <div class="card-body">
+			      <h5 class="card-title">Adress: <span th:text="${e.adress}" ></span></h5>
+			      <p class="card-text" >Prix par mois: <span th:text="${e.prix}"></span> DT</p>
+			      <p class="card-text" >Disponiblité: <span th:text="${e.dispo}"></span></p>
+ 			      <p class="card-text">
+ 			      <div class="row">
+ 			      	<div class="col">
+ 			      	  <a 
+				      	  class="btn btn-sm btn-danger"	
+					      th:text="Supprimer"
+						  th:href="@{delete(id_logement=${e.id}, page=${pg})}" 
+					  />
+ 			      	</div>
+ 			      	<div class="col">
+				      <a 
+				      	  class="btn btn-sm btn-primary"	
+					      th:text="Modifier"
+						  th:href="@{modify(id_logement=${e.id}, page=${pg})}" 
+					  /> 	
+ 			      	</div>
+ 			      </div>
+				 </p>
+			    </div>
+			  </div>
+			</div>
+	</div>
+	<div class="container">
+		<UL class="nav">
+			<LI th:each="p:${pages}">&nbsp;&nbsp;[<a style="color:black" th:text=${p}
+				th:href="@{Affichage(page=${p})}" />]&nbsp;&nbsp;
+			</LI>
+		</UL>
+	</div>
 </body>
 </html>

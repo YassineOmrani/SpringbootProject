@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/nav.css}"/>
+    <title>Home</title>
+</head>
+<body>
+     <header>
+        <a th:href="@{/}" >
+        	<img class="logo" th:src="@{/images/logo.png}" alt="logo">
+        </a>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="#" class="mySubLinks">Logement</a></li>
+                <li><a href="#" class="mySubLinks">Projects</a></li>
+                <li><a href="#" class="mySubLinks">About</a></li>
+            </ul>
+        </nav>
+        <a class="cta" th:href="@{/loginAs}" ><button class="myButton">Login</button></a>
+     </header>
+	<div class="container text-center">
+	    <h1 class="text-center"> Are u an agency or a Client ? </h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="offset-2 col-4 ">
+				<div class="card" style="width: 18rem;">
+				  <img th:src="@{/images/agency.png}" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">agency login</h5>
+				    <p class="card-text">comme etant une agence vous pouvez mettre vos logement qui sont disponible et pret a etre louer</p>
+				    <div class="text-center">
+						<a th:href="@{/agence/login}" class="btn btn-success stretched-link">Login</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="card" style="width: 18rem;">
+				  <img th:src="@{/images/client.png}" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Client login</h5>
+				    <p class="card-text">comme etant un client vous beneficier des services pour allouer un maison ou un studio ou un appartement</p>
+				    <div class="text-center">
+				    	<a th:href="@{/client/login}" class="btn btn-success stretched-link">Login</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

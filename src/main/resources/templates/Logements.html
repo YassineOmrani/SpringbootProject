@@ -1,35 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8"/>
-<title>Liste des logements</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
+	<meta charset="utf-8" />
+	<title>Liste des logements</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}" />
+		<div th:replace="Fragements/nav :: head"></div>
 
 </head>
+<!-- th replace -->
 <body>
-<p th:text="${id}">
-<h1> <center>Liste des logements par page</center></h1>
-<div class="marges">
-<table class="table table-striped">
-<thead>
-<th>ID</th><th>Adresse</th><th>Disponibilité</th><th>Prix</th><th></th><th></th>
-</thead>
-<tbody>
-<tr th:each="e:${page_logement.content}">
-<td th:text="${e.id}" />
-<td th:text="${e.adress}" />
-<td th:text="${e.dispo}" />
-<td th:text="${e.prix}" />
-<td> <a th:text="Location" th:href="@{location(id_logement=${e.id})}"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="container">
-<UL class="nav">
-<LI th:each="p:${pages}">&nbsp;&nbsp;[<a th:text=${p} th:href="@{Affichage(page=${p})}"/>]&nbsp;&nbsp;</LI>
-</UL>
-</div>
+		<div th:replace="Fragements/nav :: navbarClient"></div>
+		<h1 class="text-center">
+			Liste des logements 
+		</h1>
+		<!--<div class="marges">
+			<table class="table table-striped">
+				<thead>
+					<th>ID</th>
+					<th>Adresse</th>
+					<th>Disponibilité</th>
+					<th>Prix</th>
+					<th></th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr th:each="e:${page_logement.content}">
+						<td th:text="${e.id}" />
+						<td th:text="${e.adress}" />
+						<td th:text="${e.dispo}" />
+						<td th:text="${e.prix}" />
+						<td> <a th:text="Location" th:href="@{location(id_logement=${e.id})}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div> -->
+			<div class="container">
+		<div class="row">
+			  <div class="card col-3" th:each="e:${page_logement.content}" style="margin-left:10px">
+			    <img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top" alt="...">
+			    <div class="card-body">
+			      <h5 class="card-title">Adress: <span th:text="${e.adress}" ></span></h5>
+			      <p class="card-text" >Prix par mois: <span th:text="${e.prix}"></span> DT</p>
+			      <p class="card-text" >Disponiblité: <span th:text="${e.dispo}"></span></p>
+ 			      <p class="card-text">
+ 			      	<div class="text-center">
+ 			      	  <a 
+				      	  class="btn btn-sm btn-success"	
+					      th:text="Location"
+						  th:href="@{location(id_logement=${e.id}, page=${pg})}" 
+					  />
+ 			      	</div>
+				 </p>
+			    </div>
+			  </div>
+			</div>
+	</div>
+		<div class="container">
+			<ul class="nav">
+				<li  th:each="p:${pages}">&nbsp;&nbsp;[<a style="color:black;" th:text=${p} th:href="@{Affichage(page=${p})}" />]&nbsp;&nbsp;
+				</li>
+			</ul>
+		</div>
 </body>
+
 </html>

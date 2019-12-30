@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Liste des logements</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}" />
+		<div th:replace="Fragements/nav :: head"></div>
+
+</head>
+<!-- th replace -->
+<body>
+		<div th:replace="Fragements/nav :: navbarClient"></div>
+		<h1 class="text-center">
+			Mes Contrats  
+		</h1>
+		<div class="container border">
+			<table class="table table-striped">
+				<thead>
+					<th>Id</th>
+					<th>Duree</th>
+					<th>Agence</th>
+					<th>Client</th>
+					<th>Logement</th>
+				</thead>
+				<tbody>
+					<tr th:each="e:${page_contrat.content}">
+						<td th:text="${e.id}" />
+						<td th:text="${e.duree}" />
+						<td th:text="${e.getAgence().getNom()}" />
+						<td th:text="${e.getClient().getNom()}" />
+						<td th:text="${e.getLogement().getAdress()}" />
+					</tr>
+				</tbody>
+			</table>
+		</div> 
+		<div class="container">
+			<ul class="nav">
+				<li  th:each="p:${pages}">&nbsp;&nbsp;[<a style="color:black;" th:text=${p} th:href="@{Affichage(page=${p})}" />]&nbsp;&nbsp;
+				</li>
+			</ul>
+		</div>
+</body>
+
+</html>

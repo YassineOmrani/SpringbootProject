@@ -1,61 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}"/>
-    <title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<div th:replace="Fragements/nav :: head"></div>>
+<title>Home</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" th:href="@{home}">Navbar</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" th:href="@{signup}">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" th:href="@{login}">Features</a>
-	      </li>
-	    </ul>
-	  </div>
-	</nav>
+	<div th:replace="Fragements/nav :: navbar"></div>
 	<div class="container text-center">
-	    <h1 class="text-center"> HousingTN </h1>
-	    <p>Platform de location des logement</p>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="offset-2 col-4 ">
-				<div class="card" style="width: 18rem;">
-				  <img th:src="@{/images/agency.png}" class="card-img-top" alt="...">
-				  <div class="card-body">
-				    <h5 class="card-title">agency login</h5>
-				    <p class="card-text">comme etant une agence vous pouvez mettre vos logement qui sont disponible et pret a etre louer</p>
-				    <div class="text-center">
-						<a th:href="@{/agence/login}" class="btn btn-success stretched-link">Login</a>
-				    </div>
-				  </div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="card" style="width: 18rem;">
-				  <img th:src="@{/images/client.png}" class="card-img-top" alt="...">
-				  <div class="card-body">
-				    <h5 class="card-title">Client login</h5>
-				    <p class="card-text">comme etant un client vous beneficier des services pour allouer un maison ou un studio ou un appartement</p>
-				    <div class="text-center">
-				    	<a th:href="@{/client/login}" class="btn btn-success stretched-link">Login</a>
-				    </div>
-				  </div>
-				</div>
-			</div>
-		</div>
+		<h1 class="text-center">HousingTN</h1>
+		<p>Platform de location des logement</p>
 	</div>
 </body>
 </html>

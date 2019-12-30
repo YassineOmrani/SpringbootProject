@@ -1,0 +1,52 @@
+<div th:fragment="navbar">
+	<header>
+		<a th:href="@{/}"> <img class="logo" th:src="@{/images/logo.png}"
+			alt="logo">
+		</a>
+		<nav>
+			<ul class="nav__links">
+				<li><a href="#" class="mySubLinks">Vision</a></li>
+				<li><a href="#" class="mySubLinks">About</a></li>
+				<li><a href="#" class="mySubLinks">Team</a></li>
+			</ul>
+		</nav>
+		<a class="cta" th:href="@{/loginAs}"><button class="myButton">Login</button></a>
+	</header>
+</div>
+
+<div th:fragment="navbarAgence">
+	<header>
+		<a th:href="@{/}"> <img class="logo" th:src="@{/images/logo.png}"
+			alt="logo">
+		</a>
+		<nav>
+			<ul class="nav__links">
+				<li><a th:href="@{/agence/Affichage}" class="mySubLinks">Mes Logements</a></li>
+				<li><a th:href="@{/agence/mesContrats}" class="mySubLinks">Mes Contracts</a></li>
+			</ul>
+		</nav>
+		<a class="cta" th:href="@{/agence/logout}"><button class="myButton">Logout</button></a>
+	</header>
+</div>
+
+<div th:fragment="navbarClient">
+	<header>
+		<a th:href="@{/}"> <img class="logo" th:src="@{/images/logo.png}"
+			alt="logo">
+		</a>
+		<nav>
+			<ul class="nav__links">
+				<li><a th:href="@{/client/Affichage}" class="mySubLinks">Mes Logements</a></li>
+				<li><a th:href="@{/client/mesContrats}" class="mySubLinks">Mes Contrats</a></li>
+			</ul>
+		</nav>
+		<a class="cta" th:href="@{/client/logout}"><button class="myButton">Logout</button></a>
+	</header>
+</div>
+
+
+	<div th:fragment="head">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/marge.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/nav.css}" />
+	</div>
