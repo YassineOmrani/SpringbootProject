@@ -29,9 +29,7 @@ public class DisplayController {
 	public String Affichage(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
 			HttpServletRequest request) {
 		Page<Logement> liste = logementRepo.findAll(PageRequest.of(p, 5));
-		if (liste.isEmpty()) {
-			return "home";
-		} else {
+
 			model.addAttribute("page_logement", liste);
 			int nbPages = liste.getTotalPages();
 			int pages[] = new int[nbPages];
@@ -40,7 +38,7 @@ public class DisplayController {
 			model.addAttribute("pages", pages);
 
 			return "home";
-		}
+		
 	}
 	
 }
