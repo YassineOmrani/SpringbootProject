@@ -219,7 +219,7 @@ public class AgenceController {
 	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
 	// Afficher les contrats pour les clients

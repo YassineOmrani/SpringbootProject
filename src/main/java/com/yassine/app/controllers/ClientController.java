@@ -112,7 +112,7 @@ public class ClientController {
 	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
 	
