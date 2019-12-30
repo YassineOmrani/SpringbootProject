@@ -10,18 +10,12 @@
 <body>
 	<div th:replace="Fragements/nav :: navbar"></div>
 	<div class="container text-center">
-		<h1 class="text-center">HousingTN</h1>
-		<p>Platform de location des logement</p>
+		<h1 class="text-center">Search Result</h1>
+		<p>HousingTN</p>
 	</div>
 	<div class="container" >
 		<div class="text-center">
-			<form th:action="@{/searchLogements}" method="post" th:object="${logement}">
-				<div class="form-group">
-					<input class="form-control" type="text"
-						placeholder="Search logement" th:field="${logement.adress}" style="font-size: 30px;" />
-				</div>
-				<input type="submit" class="btn btn-lg btn-success" value="Search" />
-			</form>
+			<a  th:href="@{/}" class="btn btn-lg btn-primary">Search again</a>
 		</div>
 		<div class="row" th:if="${page_logement.content}" style="margin-top:25px;">
 			<div class="card col-2" th:each="e:${page_logement.content}"

@@ -122,7 +122,7 @@ public class AgenceController {
 	public String Affichage(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
 			HttpServletRequest request) {
 		Page<Logement> liste = log.findByIdAgence((Long) (request.getSession().getAttribute("id")),
-				PageRequest.of(p, 6));
+				PageRequest.of(p, 5));
 		model.addAttribute("page_logement", liste);
 		model.addAttribute("a", (Long) (request.getSession().getAttribute("id")));
 		int nbPages = liste.getTotalPages();
