@@ -40,11 +40,7 @@ public class ClientController {
 	@Autowired
 	AgenceRepository age;
 	
-	// I declared this just to display home when using thymeleaf th:href{@home}
-	@RequestMapping(value="/home")
-	public String displayHome(Model model) {
-		return "home";
-	}
+
 	
 	
 	@RequestMapping(value="/signup")

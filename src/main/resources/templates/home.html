@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<div th:replace="Fragements/nav :: head"></div>>
+	<div th:replace="Fragements/nav :: head"></div>
 <title>Home</title>
 </head>
 <body>
@@ -12,6 +12,31 @@
 	<div class="container text-center">
 		<h1 class="text-center">HousingTN</h1>
 		<p>Platform de location des logement</p>
+	</div>
+	<div class="container" >
+		<div class="row" th:if="${page_logement.content}">
+			<div class="card col-2" th:each="e:${page_logement.content}"
+				style="margin: 10px; position:relative">
+				<img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top"
+					alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						Adress: <span th:text="${e.adress}"></span>
+					</h5>
+					<p class="card-text">
+						Prix par mois: <span th:text="${e.prix}"></span> DT
+					</p>
+ 			      	<div class="text-center" style="padding:4px;">
+ 			      	  <a 
+				      	  class="btn btn-sm btn-success"	
+					      th:text="Allouer"
+						  th:href="@{/client/login}"
+						  style="position: absolute;bottom:0;padding:3px;" 
+					  />
+ 			      	</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
