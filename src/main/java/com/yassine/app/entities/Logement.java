@@ -33,6 +33,9 @@ public class Logement {
 	@Column(name="prix")
 	private float prix;
 	
+	@Column(name="type")
+	private String type;
+	
 	@OneToOne(mappedBy = "logement")
     private Contrat contrat;
 	

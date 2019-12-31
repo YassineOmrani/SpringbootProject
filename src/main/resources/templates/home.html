@@ -14,38 +14,69 @@
 		<p>Platform de location des logement</p>
 	</div>
 	<div class="container" >
-		<div class="text-center">
+		<div class="text-center border" style="padding:30px; margin-bottom:40px;margin-top:40px;">
+			<h2 class="display-3" style="margin-bottom:45px">Recherche d'un logement</h2>
 			<form th:action="@{/searchLogements}" method="post" th:object="${logement}">
 				<div class="form-group">
-					<input class="form-control" type="text"
-						placeholder="Search logement" th:field="${logement.adress}" style="font-size: 30px;" />
+					<div class="row">
+						<div class="col-4">
+							<input 	class="form-control" 
+									type="text"
+									placeholder="Adress logement" 
+									th:field="${logement.adress}"
+							 />							
+						</div>
+						<div class="col-4">
+							<select th:field="*{type}" class="form-control">
+								  <option th:value="''">Type logement</option>
+							      <option th:value="'maison'" >Maison</option>
+							      <option th:value="'appartement'" >Appartement</option>
+							      <option th:value="'studio'" >Studio</option>
+							</select>
+						</div>
+						<div class="col-4">
+							<input 	class="form-control" 
+									type="text"
+									th:field="${logement.prix}"
+									
+							 />									
+						</div>
+						</div>												
+					</div>
 				</div>
-				<input type="submit" class="btn btn-lg btn-success" value="Search" />
+				<input type="submit" class="btn btn-md btn-success" value="Search" />
 			</form>
 		</div>
-		<div class="row" th:if="${page_logement.content}" style="margin-top:25px;">
-			<div class="card col-2" th:each="e:${page_logement.content}"
-				style="margin: 10px; position:relative">
-				<img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top"
-					alt="...">
-				<div class="card-body">
-					<h5 class="card-title">
-						Adress: <span th:text="${e.adress}"></span>
-					</h5>
-					<p class="card-text">
-						Prix par mois: <span th:text="${e.prix}"></span> DT
-					</p>
- 			      	<div class="text-center" style="padding:4px;">
- 			      	  <a 
-				      	  class="btn btn-sm btn-success"	
-					      th:text="Allouer"
-						  th:href="@{/client/login}"
-						  style="position: absolute;bottom:0;padding:3px;" 
-					  />
+		<div class="container">
+			<div class="row" th:if="${page_logement.content}" style="margin-top:25px;">
+				<div class="card col-2" th:each="e:${page_logement.content}"
+					style="margin: 10px; position:relative">
+					<img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top"
+						alt="...">
+					<div class="card-body">
+						<h5 class="card-title">
+							Adress: <span th:text="${e.adress}"></span>
+						</h5>
+						<p class="card-text">
+							Prix par mois: <span th:text="${e.prix}"></span> DT
+						</p>
+	 			      	<div class="text-center" style="padding:4px;">
+	 			      	  <a 
+					      	  class="btn btn-sm btn-success"	
+						      th:text="Allouer"
+							  th:href="@{/client/login}"
+							  style="position: absolute;bottom:0;padding:3px;" 
+						  ></a>
  			      	</div>
 				</div>
 			</div>
+		</div>			
 		</div>
+	<div class="container">
+		<ul class="nav">
+			<li  th:each="p:${pages}">&nbsp;&nbsp;[<a style="color:black;" th:text=${p} th:href="@{/(page=${p})}" />]&nbsp;&nbsp;
+			</li>
+		</ul>
 	</div>
 </body>
 </html>

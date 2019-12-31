@@ -20,7 +20,12 @@ public class DisplayController {
 	LogementRepository logementRepo;
 	
 	@RequestMapping("/loginAs")
-	public String displayLogin(Model model) {
+	public String displayLogin(Model model, HttpServletRequest request) {
+		if ( request.getSession().getAttribute("idClient") != null) {
+			return "redirect:client/Affichage";
+		}else if (request.getSession().getAttribute("idAgence") != null) {
+			return "redirect:agence/Affichage";
+		}else
 		return "loginAs";
 	}
 	
@@ -56,12 +61,13 @@ public class DisplayController {
 	) 
 	{
 		
-		System.out.println(l.getAdress());
-		//	Get the list of logement with name Search.text 
-		Page<Logement> liste = logementRepo.findByAdress(l.getAdress(), PageRequest.of(p, 6));
 		
+			//	Get the liste of logement with adress like the entered text in search bar 
+			Page<Logement> liste = logementRepo.findBy3(l.getAdress(),l.getType(),l.getPrix(), PageRequest.of(p, 6));
+		    
+
 		
-		//	Test if list is not empty
+		//	Test if liste is not empty
 		if (!liste.isEmpty()) {
 			model.addAttribute("page_logement", liste);
 			int nbPages = liste.getTotalPages();
@@ -69,7 +75,7 @@ public class DisplayController {
 			for (int i = 0; i < nbPages; i++)
 				pages[i] = i;
 			model.addAttribute("pages", pages);
-			
+			model.addAttribute("searchError","Please fill in all search parameters");
 			return "searchResult";
 			
 		}else {

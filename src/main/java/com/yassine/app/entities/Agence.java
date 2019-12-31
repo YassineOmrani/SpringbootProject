@@ -26,11 +26,19 @@ public class Agence implements Serializable{
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="numTelephone")
+	private String numTel;
+	
+	@Column(name="adressAgence")
+	private String adress;
+	
 	@Column(name="password")
 	private String password;
 	
 	@Column(name="nom")
 	private String nom;
+	
+	
 	@OneToMany(targetEntity = Logement.class, cascade= CascadeType.ALL)
 	@JoinColumn(name = "idAgence", referencedColumnName="id")
 	private List<Logement> listLogement;

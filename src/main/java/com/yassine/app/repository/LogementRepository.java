@@ -27,6 +27,9 @@ public interface LogementRepository extends JpaRepository<Logement, Long> {
 	// Find last inserted Logement Row
 	Logement findTopByOrderByIdDesc();
 	
-	@Query(value = "SELECT * FROM Logements l Where l.adress LIKE %:adress%" , nativeQuery=true)
-	Page<Logement> findByAdress(@Param("adress")String adressText,Pageable p);
+	@Query(value = "SELECT * FROM Logements l Where (l.adress LIKE %:adress% AND l.prix <= :prixMax AND l.type = :type) " , nativeQuery=true)
+	Page<Logement> findBy3(	@Param("adress")String adressText,
+							@Param("type")String type,
+							@Param("prixMax")float prixMax,
+							Pageable p);
 }

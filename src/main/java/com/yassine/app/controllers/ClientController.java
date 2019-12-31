@@ -73,7 +73,7 @@ public class ClientController {
 		for(int i=0;i<nbPages; i++)
 			pages[i]=i;
 		model.addAttribute("pages", pages);
-		model.addAttribute("id",request.getSession().getAttribute("id"));
+		model.addAttribute("id",request.getSession().getAttribute("idClient"));
 		
 		return "Logements";
 	}
@@ -87,7 +87,7 @@ public class ClientController {
 	   	@RequestParam(name="page", defaultValue="0")int p
    	) 
 	{
-		Client c = clientRepo.getOne((long) request.getSession().getAttribute("id"));
+		Client c = clientRepo.getOne((long) request.getSession().getAttribute("idClient"));
 		Page<Contrat> listContrat = con.findByClient(c, PageRequest.of(p, 5));
 		
 		model.addAttribute("page_contrat", listContrat);
@@ -99,7 +99,7 @@ public class ClientController {
 		}
 
 		model.addAttribute("pages", pages);
-		model.addAttribute("id",request.getSession().getAttribute("id"));
+		model.addAttribute("id",request.getSession().getAttribute("idClient"));
 		
 		
 		return "mesContrats";
@@ -136,7 +136,7 @@ public class ClientController {
 			if (bCryptPasswordEncoderLocal.matches(client.getPassword(), client1.get().getPassword())) {
 				model.addAttribute("currentClient", client1);
 				request.getSession().setAttribute("userType", "Client");
-				request.getSession().setAttribute("id", client1.get().getId());
+				request.getSession().setAttribute("idClient", client1.get().getId());
 				return "redirect:Affichage";
 			}else {			
 				Client client2 = new Client();
@@ -156,7 +156,7 @@ public class ClientController {
 		Contrat c1	=	new Contrat();
 		Logement l1=log.findById(id).get();
 		c1.setLogement(l1);
-		c1.setClient(clientRepo.findById((Long)request.getSession().getAttribute("id")).get());
+		c1.setClient(clientRepo.findById((Long)request.getSession().getAttribute("idClient")).get());
 		Agence a1=age.findById(l1.getIdAgence()).get();
 		c1.setAgence(a1);
 		model.addAttribute("contrat",c1);

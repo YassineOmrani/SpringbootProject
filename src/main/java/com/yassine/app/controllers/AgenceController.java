@@ -88,7 +88,7 @@ public class AgenceController {
 				// Setting the logement as disponible
 					l.setDispo(true);
 				// Setting the agenceId as the creator of the logement
-					l.setIdAgence((Long) request.getSession().getAttribute("id"));
+					l.setIdAgence((Long) request.getSession().getAttribute("idAgence"));
 				// Finaly Save the Logement
 					log.save(l);
 					
@@ -121,10 +121,10 @@ public class AgenceController {
 	@RequestMapping(value = "/Affichage")
 	public String Affichage(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
 			HttpServletRequest request) {
-		Page<Logement> liste = log.findByIdAgence((Long) (request.getSession().getAttribute("id")),
+		Page<Logement> liste = log.findByIdAgence((Long) (request.getSession().getAttribute("idAgence")),
 				PageRequest.of(p, 5));
 		model.addAttribute("page_logement", liste);
-		model.addAttribute("a", (Long) (request.getSession().getAttribute("id")));
+		model.addAttribute("a", (Long) (request.getSession().getAttribute("idAgence")));
 		int nbPages = liste.getTotalPages();
 		int pages[] = new int[nbPages];
 		for (int i = 0; i < nbPages; i++)
@@ -143,7 +143,13 @@ public class AgenceController {
 
 	@RequestMapping(value = "/signupAgence", method = RequestMethod.POST)
 	public String signupAgence(Agence a, Model model) {
-		if (a.getEmail() == "" || a.getNom() == "" || a.getPassword() == "") {
+		if (
+				a.getEmail() 	== "" ||
+				a.getNom() 		== "" ||
+				a.getPassword() == "" ||
+				a.getAdress() 	== "" ||
+				a.getNumTel()	== "" 
+			) {
 			Agence a1 = new Agence();
 			model.addAttribute("agence", a1);
 			return "signupAgence";
@@ -165,6 +171,7 @@ public class AgenceController {
 
 	@RequestMapping(value = "/authAgence")
 	public String authClient(Model model, Agence agence, HttpServletRequest request) {
+		
 		Optional<Agence> agence1 = agenceRepo.findByEmail(agence.getEmail());
 
 		if (agence1.isPresent()) {
@@ -173,7 +180,7 @@ public class AgenceController {
 			if (bCryptPasswordEncoderLocal.matches(agence.getPassword(), agence1.get().getPassword())) {
 				model.addAttribute("currentAgence", agence1);
 				request.getSession().setAttribute("userType", "Agence");
-				request.getSession().setAttribute("id", agence1.get().getId());
+				request.getSession().setAttribute("idAgence", agence1.get().getId());
 				return "redirect:verif";
 			} else {
 				// Wrong password
@@ -182,7 +189,7 @@ public class AgenceController {
 				return "loginAgence";
 			}
 		} else {
-			// Not in database
+				// Not found in database
 			Agence a = new Agence();
 			model.addAttribute("agence", a);
 			return "loginAgence";
@@ -210,7 +217,7 @@ public class AgenceController {
 	public String modiferLogement(Model model, Logement l, @RequestParam(name = "page", defaultValue = "0") int p,
 			RedirectAttributes ra, HttpServletRequest request) {
 		l.setDispo(true);
-		l.setIdAgence((Long) request.getSession().getAttribute("id"));
+		l.setIdAgence((Long) request.getSession().getAttribute("idAgence"));
 		log.save(l);
 		ra.addAttribute("page", p);
 		return "redirect:Affichage";
@@ -231,7 +238,7 @@ public class AgenceController {
 	   	@RequestParam(name="page", defaultValue="0")int p
    	) 
 	{
-		Agence a = agenceRepo.getOne((long)request.getSession().getAttribute("id"));
+		Agence a = agenceRepo.getOne((long)request.getSession().getAttribute("idAgence"));
 		Page<Contrat> listContrat = con.findByAgence(a, PageRequest.of(p, 5));
 		
 		model.addAttribute("page_contrat", listContrat);
@@ -243,7 +250,7 @@ public class AgenceController {
 		}
 
 		model.addAttribute("pages", pages);
-		model.addAttribute("id",request.getSession().getAttribute("id"));
+		model.addAttribute("id",request.getSession().getAttribute("idAgence"));
 		
 		
 		return "mesContrats";

@@ -32,13 +32,21 @@
 							class="text-danger" th:errors="*{prix}">prix Error</span>
 					</div>
 					<div class="form-group">
-						<label class="control-label">image</label> 
+						<label class="control-label">Type</label>
+							 <select class="form-control" th:field="*{type}">
+							    <option th:value="'Appartement'" th:text="Appartement"></option>
+							    <option th:value="'Maison'" th:text="Maison"></option>
+							    <option th:value="'Studio'" th:text="Studio"></option>
+							</select> 
+						 <span class="text-danger" th:errors="*{prix}">Type Error</span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Image</label> 
 						<input 	type="file"
 								th:field="*{images}"
 								class="form-control"
 						 /> 
 					</div>
-
 					<div>
 						<button type="submit" class="form-control">create</button>
 					</div>

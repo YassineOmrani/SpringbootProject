@@ -53,16 +53,46 @@
 			          <div class="form-group">
 			            <div class="row">
 			            	<div class="col-4">
-			            		<label class="control-label"> Password : </label>
+			            		<label class="control-label"> Adress Agence : </label>
 			            	</div>
-			         	    <div class="col-8">
-					    	   <input
-					              type="password"
+			               	<div class="col-8">
+								<input
+					              type="text"
 					              size="20"
-					              th:field="${agence.password}"
+					              th:field="${agence.adress}"
 					              class="form-control"
 					            />
+			               	</div>
+			            </div>
+			          </div>
+			          <div class="form-group">
+			            <div class="row">
+			            	<div class="col-4">
+			            		<label class="control-label"> Num Telephone : </label>
 			            	</div>
+			               	<div class="col-8">
+								<input
+					              type="text"
+					              size="20"
+					              th:field="${agence.numTel}"
+					              class="form-control"
+					            />
+			               	</div>
+			            </div>
+			          </div>			          
+			          <div class="form-group">
+			            <div class="row">
+				            	<div class="col-4">
+				            		<label class="control-label"> Password : </label>
+				            	</div>
+				         	    <div class="col-8">
+						    	   <input
+						              type="password"
+						              size="20"
+						              th:field="${agence.password}"
+						              class="form-control"
+						            />
+				            	</div>
 			            	</div>
 			          </div>
 			          <div>
