@@ -117,6 +117,40 @@ public class AgenceController {
 			return "redirect:Affichage";
 		}
 	}
+	
+
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String ModifierLogement(
+			Model model,
+			@RequestParam(name = "page", defaultValue = "0") int p,
+			@RequestParam(name = "id_logement", defaultValue = "1") int id
+			){
+		
+			Optional<Logement> l 	= log.findById(new Long(id));
+			model.addAttribute("Logement", l.get());
+			model.addAttribute("pg", p);
+			return "modify";
+	}
+
+	@RequestMapping(value = "/saveMod", method = RequestMethod.POST)
+	public String modiferLogement(
+					Model model, Logement l,
+					@RequestParam(name = "page", defaultValue = "0") int p,
+					RedirectAttributes ra,
+					HttpServletRequest request,
+					@RequestParam(value = "images") MultipartFile[] files
+			){
+				ra.addAttribute("page", p);
+				l.setDispo(true);
+				l.setIdAgence((Long) request.getSession().getAttribute("idAgence"));
+				log.save(l);
+				
+				 
+				return "redirect:Affichage";
+	}
+	
+	
+	
 
 	@RequestMapping(value = "/Affichage")
 	public String Affichage(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
@@ -204,25 +238,8 @@ public class AgenceController {
 		return "redirect:Affichage";
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String ModifierLogement(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
-			@RequestParam(name = "id_logement", defaultValue = "1") int id) {
-		Optional<Logement> l = log.findById(new Long(id));
-		model.addAttribute("Logement", l);
-		model.addAttribute("pg", p);
-		return "modify";
-	}
 
-	@RequestMapping(value = "/saveMod", method = RequestMethod.POST)
-	public String modiferLogement(Model model, Logement l, @RequestParam(name = "page", defaultValue = "0") int p,
-			RedirectAttributes ra, HttpServletRequest request) {
-		l.setDispo(true);
-		l.setIdAgence((Long) request.getSession().getAttribute("idAgence"));
-		log.save(l);
-		ra.addAttribute("page", p);
-		return "redirect:Affichage";
-	}
-	
+
 	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();

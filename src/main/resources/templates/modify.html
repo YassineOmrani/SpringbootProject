@@ -10,24 +10,32 @@
 <body>
 
 	<h1>
-		<center> Modification d'un logement</center>
+		<center>Modification d'un logement</center>
 	</h1>
 
-	<form th:action="@{saveMod(page=${pg})}" method="post"	th:object="${Logement}">
-		<label class="control-label">Addresse</label>
-<input type="text" th:field="*{adress}" class="form-control"/>
-<span th:errors="*{adress}" th:errorclass="fieldError">adress error</span>
-</div>
-<div class="form-group">
-<label class="control-label" >prix</label>
-<input type="text" th:field="*{prix}" class="form-control"/>
-<span class="text-danger" th:errors="*{prix}">prix Error</span>
-</div>
-<input type="hidden" th:field="*{id}">
-
-			<div>
-				<button type="submit" class="form-control">Modifier...</button>
-			</div>
+	<form th:action="@{saveMod(page=${pg})}" method="POST"
+		th:object="${Logement}" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="control-label">Addresse</label> <input type="text"
+							th:field="*{adress}" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label class="control-label">prix</label> <input type="text"
+							th:field="*{prix}" class="form-control" /> 
+					</div>
+					<div class="form-group">
+						<label class="control-label">Type</label>
+							 <select class="form-control" th:field="*{type}">
+							    <option th:value="'Appartement'" th:text="Appartement"></option>
+							    <option th:value="'Maison'" th:text="Maison"></option>
+							    <option th:value="'Studio'" th:text="Studio"></option>
+							</select> 
+					</div>
+					
+		<input type="hidden" th:field="*{id}">
+		<div>
+			<button type="submit" class="form-control">Modifier...</button>
+		</div>
 		</div>
 	</form>
 

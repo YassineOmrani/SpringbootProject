@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<div th:replace="Fragements/nav :: head"></div>
+<title>Home</title>
+</head>
+<body>
+	<div class="text-center">
+		<a th:href="@{/}" class="btn btn-success" style="margin-top:50px">Back to home</a>
+	</div>
+	<div class="container border" th:each="e : ${logement}" style="margin:50px">
+		<div class="row">
+			<div class="col-2">
+				<h1 class="display-4">Adress:</h1>
+			</div>
+			<div class="col-8" >
+				<h1 class="display-4" th:text="${e.adress}"></h1>
+			</div>
+		</div>
+		<div class="row" >
+			<div class="col" >
+				<img th:src="@{'/image/'+${e.images[0].path}}" class="card-img-top"
+					style="margin-bottom: 30px;" >
+			</div>
+			<div class="col">
+				<div class="row">
+					<div class="col-2">
+						<h4>Type:</h4> 
+					</div>
+					<div class="col">
+						<h4 th:text="${e.type}"></h4>
+					</div>	
+				</div>
+				<div class="row">
+					<div class="col-4">
+						<h4>Disponibilité:</h4> 
+					</div>
+					<div class="col">
+						<h4 th:text="${e.dispo}"></h4>
+					</div>	
+				</div>
+				<div class="row">
+					<div class="col-4">
+						<h4>Prix par mois:</h4> 
+					</div>
+					<div class="col-2">
+						<h4 th:text="${e.prix}"></h4>
+					</div>
+					<div class="col-1">
+						<h4>DT</h4>
+					</div>		
+				</div>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

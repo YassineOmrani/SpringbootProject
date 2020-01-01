@@ -52,6 +52,11 @@
 						  th:href="@{location(id_logement=${e.id}, page=${pg})}" 
 					  />
  			      	</div>
+ 			      	<div class="text-center">
+						<a class="btn btn-sm btn-primary" th:text="Details"
+							th:href="@{details(id_logement=${e.id}, page=${pg})}"
+							style="position: absolute; bottom: 0; padding: 5px;margin-bottom:10px;margin-left:-80px;"></a>			      		
+ 			      	</div>
 				 </p>
 			    </div>
 			  </div>
